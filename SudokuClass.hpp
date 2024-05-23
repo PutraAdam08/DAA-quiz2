@@ -16,11 +16,13 @@ class sudoku{
         }
 
         void print(){
+            cout << " ";
             for(int j = 0; j < 9; j++){
                 cout << " " << j;
             }
             cout << endl;
             for(int i = 0; i < 9; i++){
+                cout << i;
                 for(int j = 0; j < 9; j++){
                     cout << " " << sudoArr[i][j];
                 }
