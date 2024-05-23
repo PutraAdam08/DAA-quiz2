@@ -15,6 +15,19 @@ class sudoku{
             fixNum[x][y] = v;
         }
 
+        void print(){
+            for(int j = 0; j < 9; j++){
+                cout << " " << j;
+            }
+            cout << endl;
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    cout << " " << sudoArr[i][j];
+                }
+                cout << endl;
+            }
+        }
+
         sudoku(){
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
