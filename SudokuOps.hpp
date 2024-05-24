@@ -63,7 +63,8 @@ class Sudops : private sudoku{
                 int col = rand() % 9;
                 int num = (rand() % 9) + 1;
 
-                if (isSafe(sudoArr, row, col, num)) {
+
+                if (isSafe(getSudo(), row, col, num)) {
                     assign(row, col, num);
                     setFixed(row, col, true);
                     prefilledCells--;

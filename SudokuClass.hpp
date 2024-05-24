@@ -11,8 +11,12 @@ class sudoku{
             sudoArr[x][y] = v;
         }
 
-        void setFixed(int x, int y, int v){
+        void setFixed(int x, int y, bool v){
             fixNum[x][y] = v;
+        }
+
+        int(*getSudo())[9] {
+            return sudoArr;
         }
 
         void print(){
@@ -31,12 +35,7 @@ class sudoku{
         }
 
         sudoku(){
-            for(int i = 0; i < 9; i++){
-                for(int j = 0; j < 9; j++){
-                    sudoArr[i][j] = 0;
-                    fixNum[i][j] = false;
-                }
-            }
+            
         }
 };
 
