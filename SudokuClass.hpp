@@ -19,6 +19,10 @@ class sudoku{
             return sudoArr;
         }
 
+        bool(*getfNum())[9] {
+            return fixNum;
+        }
+
         void print(){
             cout << " ";
             for(int j = 0; j < 9; j++){
@@ -35,7 +39,12 @@ class sudoku{
         }
 
         sudoku(){
-            
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    sudoArr[i][j] = 0;
+                    fixNum[i][j] = false;
+                }
+            }
         }
 };
 

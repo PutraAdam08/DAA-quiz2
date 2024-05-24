@@ -1,21 +1,20 @@
 #include <bits/stdc++.h>
 #include "SudokuClass.hpp"
 
-class Sudops : private sudoku{
+class sudops : private sudoku{
     public:
-        void inVal(int s[9][9]) {
+        void inVal(int v) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    if (!fixNum[i][j] && isSafe(s, i, j, s[i][j])) {
-                        assign(i, j, s[i][j]);
-                    } else if (fixNum[i][j]) {
-                        assign(i, j, sudoArr[i][j]);
+                    if (!getfNum() && isSafe(getSudo(), i, j, v)) {
+                        assign(i, j, v);
+                    } else if (getfNum()) {
+                        assign(i, j, v);
                     } else {
-                        return 0;
+                        break;
                     }
                 }
             }
-            return 1;
         }
 
         bool UsedInRow(int s[9][9], int row, int num){
@@ -81,19 +80,19 @@ class Sudops : private sudoku{
             }
         }
 
-        bool solveSudoku(int grid[N][N], int row, int col)
+        bool solveSudoku(int grid[9][9], int row, int col)
         {
  
-            if (row == N - 1 && col == N)
+            if (row == 9 - 1 && col == 9)
                 return true;
-            if (col == N) {
+            if (col == 9) {
                 row++;
                 col = 0;
             }
             if (grid[row][col] > 0)
                 return solveSudoku(grid, row, col + 1);
         
-            for (int num = 1; num <= N; num++) 
+            for (int num = 1; num <= 9; num++) 
             {
 
                 if (isSafe(grid, row, col, num)) 
@@ -106,7 +105,10 @@ class Sudops : private sudoku{
                 grid[row][col] = 0;
             }
             return false;
-        }    
+        }
+        void prints(){
+            print();
+        }  
 
 
 };
