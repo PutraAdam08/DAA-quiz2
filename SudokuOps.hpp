@@ -27,6 +27,44 @@ class sudops : private sudoku{
         }
         
         bool UsedInBox(int s[9][9], int boxStartRow, int boxStartCol, int num){
+            if(num == 0)
+                return false;
+
+            for (int row = 0; row < 3; row++)
+                for (int col = 0; col < 3; col++)
+                    if (s[row + boxStartRow][col + boxStartCol] == num)
+                        return true;
+            return false;
+        }
+
+        bool isSafeC(int s[9][9], int row, int col, int num){
+            return !UsedInRowC(s, row, num) && !UsedInColC(s, col, num) && !UsedInBoxC(s, row - row % 3, col - col % 3, num) && s[row][col] == 0;
+        }
+
+        bool UsedInRowC(int s[9][9], int row, int num){
+            if(num == 0)
+                return false;
+
+            for (int col = 0; col < 9; col++)
+                if (s[row][col] == num)
+                    return true;
+            return false;
+        }
+
+        bool UsedInColC(int s[9][9], int col, int num){
+            if(num == 0)
+                return false;
+
+            for (int row = 0; row < 9; row++)
+                if (s[row][col] == num)
+                    return true;
+            return false;
+        }
+        
+        bool UsedInBoxC(int s[9][9], int boxStartRow, int boxStartCol, int num){
+            if(num == 0)
+                return false;
+
             for (int row = 0; row < 3; row++)
                 for (int col = 0; col < 3; col++)
                     if (s[row + boxStartRow][col + boxStartCol] == num)
@@ -75,6 +113,20 @@ class sudops : private sudoku{
             }
         }
 
+        bool isCorrect(int grid[9][9], int row, int col){
+            if (row == 9 - 1 && col == 9)
+                return true;
+            if (col == 9) {
+                row++;
+                col = 0;
+            }
+
+            if (isSafeC(grid, row, col, grid[row][col]))
+                return isCorrect(grid, row, col + 1);
+            else
+                return false;
+        }
+
         bool solveSudoku(int grid[9][9], int row, int col)
         {
  
@@ -103,7 +155,11 @@ class sudops : private sudoku{
         }
         void prints(){
             print();
-        }  
+        } 
+
+        int(*getsUdo())[9]{
+            return getSudo();
+        } 
 
 
 };

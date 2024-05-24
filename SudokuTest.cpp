@@ -14,9 +14,19 @@ int main(){
     cout << endl;
 
     int v, x, y;
-    cin >> x >> y >> v;
-    sudo.inVal(x, y, v);
-    sudo.prints();
+    if(sudo.isCorrect(sudo.getsUdo(), 0, 0))
+        cout << "Yes" << endl;
+    else{
+        cout << "No" << endl;
+    }
+    
+    sudo.solveSudoku(sudo.getsUdo(), 0, 0);
+    
+    //cin >> x >> y >> v;
+    //sudo.inVal(x, y, v);
+    //sudo.prints();
+
+
     
 
 
