@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
+#include <windows.h>
 #include "SudokuClass.hpp"
 
-class sudops : private sudoku{
+class sudops : public sudoku{
     public:
         void inVal(int x, int y, int v) {
             bool (*fixn)[9] = getfNum();
@@ -9,6 +10,7 @@ class sudops : private sudoku{
                 assign(y, x, v);
             } else {
                 cout << "Warning: You cannot insert number in that cell" << endl;
+                Sleep(10);
             }
         }
 
@@ -88,16 +90,16 @@ class sudops : private sudoku{
             int prefilledCells;
             switch (difficulty) {
                 case 1: // Easy
-                    prefilledCells = 36;
-                    break;
-                case 2: // Medium
-                    prefilledCells = 27;
-                    break;
-                case 3: // Hard
                     prefilledCells = 18;
                     break;
+                case 2: // Medium
+                    prefilledCells = 16;
+                    break;
+                case 3: // Hard
+                    prefilledCells = 14;
+                    break;
                 default:
-                    prefilledCells = 36; // Default to Easy
+                    prefilledCells = 18; // Default to Easy
             }
 
             srand(time(0));
@@ -127,29 +129,33 @@ class sudops : private sudoku{
                 return false;
         }
 
-        bool solveSudoku(int grid[9][9], int row, int col)
+        bool FindUnassignedLocation(int grid[9][9], int& row, int& col)
         {
- 
-            if (row == 9 - 1 && col == 9)
+            for (row = 0; row < 9; row++)
+                for (col = 0; col < 9; col++)
+                    if (grid[row][col] == 0)
+                        return true;
+            return false;
+        }
+
+        bool solveSudoku()
+        {
+            int row, col;
+            if (!FindUnassignedLocation(getsUdo(), row, col))
+                // success!
                 return true;
-            if (col == 9) {
-                row++;
-                col = 0;
-            }
-            if (grid[row][col] > 0)
-                return solveSudoku(grid, row, col + 1);
-        
+
             for (int num = 1; num <= 9; num++) 
             {
 
-                if (isSafe(grid, row, col, num)) 
+                if (isSafe(getsUdo(), row, col, num)) 
                 {
 
-                    grid[row][col] = num;
-                    if (solveSudoku(grid, row, col + 1))
+                    assign(row, col, num);
+                    if (solveSudoku())
                         return true;
                 }
-                grid[row][col] = 0;
+                assign(row, col, 0);
             }
             return false;
         }

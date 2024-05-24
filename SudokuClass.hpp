@@ -11,6 +11,14 @@ class sudoku{
             sudoArr[y][x] = v;
         }
 
+        void setSudo(int s[9][9]) {
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    sudoArr[i][j] = s[i][j];
+                }
+            }
+        }
+
         void setFixed(int x, int y, bool v){
             fixNum[x][y] = v;
         }
