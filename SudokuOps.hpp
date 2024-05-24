@@ -3,17 +3,12 @@
 
 class sudops : private sudoku{
     public:
-        void inVal(int v) {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (!getfNum() && isSafe(getSudo(), i, j, v)) {
-                        assign(i, j, v);
-                    } else if (getfNum()) {
-                        assign(i, j, v);
-                    } else {
-                        break;
-                    }
-                }
+        void inVal(int x, int y, int v) {
+            bool (*fixn)[9] = getfNum();
+            if (!fixn[y][x]) {
+                assign(y, x, v);
+            } else {
+                cout << "Warning: You cannot insert number in that cell" << endl;
             }
         }
 

@@ -7,8 +7,8 @@ class sudoku{
         bool fixNum[9][9];
     
     public:
-        void assign(int x, int y, int v){
-            sudoArr[x][y] = v;
+        void assign(int y, int x, int v){
+            sudoArr[y][x] = v;
         }
 
         void setFixed(int x, int y, bool v){

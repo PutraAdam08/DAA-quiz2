@@ -11,6 +11,13 @@ int main(){
     cin >> l;
     sudo.level(l);
     sudo.prints();
+    cout << endl;
+
+    int v, x, y;
+    cin >> x >> y >> v;
+    sudo.inVal(x, y, v);
+    sudo.prints();
+    
 
 
     return 0;
