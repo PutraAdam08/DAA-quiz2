@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include "SudokuClass.hpp"
 
-class Sudops : private sudoku{
+class sudops : private sudoku{
     public:
         int inVal(int s[9][9]){ // <- Insert value with checking wether the array in value is the fixed number
 
@@ -70,6 +70,10 @@ class Sudops : private sudoku{
                     prefilledCells--;
                 }
             }
+        }
+
+        void prints(){
+            print();
         }
 
 
