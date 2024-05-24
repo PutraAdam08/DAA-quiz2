@@ -1,10 +1,21 @@
 #include <bits/stdc++.h>
 #include "SudokuClass.hpp"
 
-class sudops : private sudoku{
+class Sudops : private sudoku{
     public:
-        int inVal(int s[9][9]){ // <- Insert value with checking wether the array in value is the fixed number
-
+        void inVal(int s[9][9]) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (!fixNum[i][j] && isSafe(s, i, j, s[i][j])) {
+                        assign(i, j, s[i][j]);
+                    } else if (fixNum[i][j]) {
+                        assign(i, j, sudoArr[i][j]);
+                    } else {
+                        return 0;
+                    }
+                }
+            }
+            return 1;
         }
 
         bool UsedInRow(int s[9][9], int row, int num){
@@ -62,8 +73,6 @@ class sudops : private sudoku{
                 int row = rand() % 9;
                 int col = rand() % 9;
                 int num = (rand() % 9) + 1;
-
-
                 if (isSafe(getSudo(), row, col, num)) {
                     assign(row, col, num);
                     setFixed(row, col, true);
@@ -72,9 +81,32 @@ class sudops : private sudoku{
             }
         }
 
-        void prints(){
-            print();
-        }
+        bool solveSudoku(int grid[N][N], int row, int col)
+        {
+ 
+            if (row == N - 1 && col == N)
+                return true;
+            if (col == N) {
+                row++;
+                col = 0;
+            }
+            if (grid[row][col] > 0)
+                return solveSudoku(grid, row, col + 1);
+        
+            for (int num = 1; num <= N; num++) 
+            {
+
+                if (isSafe(grid, row, col, num)) 
+                {
+
+                    grid[row][col] = num;
+                    if (solveSudoku(grid, row, col + 1))
+                        return true;
+                }
+                grid[row][col] = 0;
+            }
+            return false;
+        }    
 
 
 };
